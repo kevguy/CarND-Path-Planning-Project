@@ -134,3 +134,16 @@ that's just a guess.
 
 One last note here: regardless of the IDE used, every submitted project must
 still be compilable with cmake and make./
+
+## Reflection
+
+The path planner uses a spline function to generate a smooth set of waypoints for the vehicle to follow. In order for lower jerk, the points atake into account lane changing over a 90ms interval. 
+
+The state machine for the behaviors of the vehicle is listed as follows:
+- The vehicle knows if there's a vehicle getting in close in front of it
+- a check is made of adjacent lanes to see if they contain vehicles within minimum safe distances
+- when the "too close" flag is true, the vehicle will check if it can change lanes if adjacent lanes are clear
+
+Improvements are listed as follows:
+- The vehicle does not check which lane is more suitable for changing lanes
+- the checkings are based on safe distances without considering the speed of surrounding vehicles. If surrounding vehicles are way slower, for instance, safety distance will not be that much of a concern for chaning lanes.
